@@ -1,0 +1,110 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.217.4/containers/ruby
+{
+  "name": "Ruby on Rails & Postgres",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/myapp",
+
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2,
+    "files.associations": {
+      // "*.html.erb": "html",
+      "*.erb": "erb"
+    },
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+        "path": "bash",
+        "args": ["-l"]
+      },
+      "zsh": {
+        "path": "zsh",
+        "args": ["-l"]
+      }
+    },
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "emmet.triggerExpansionOnTab": true,
+    "emmet.includeLanguages": {
+      "erb": "html"
+    },
+    "ruby.useBundler": true,
+    "ruby.useLanguageServer": true,
+    "ruby.lint": {
+      "standard": {
+        "useBundler": true
+      }
+    },
+    "ruby.format": "standard",
+    "ruby.intellisense": "rubyLocate",
+    "solargraph.useBundler": true,
+    "solargraph.definitions": true,
+    "[ruby]": {
+      "editor.formatOnSave": false,
+      "editor.defaultFormatter": "rebornix.ruby"
+    },
+    "[html]": {
+      "editor.formatOnSave": false,
+      "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[erb]": {
+      "editor.formatOnSave": false,
+      "editor.defaultFormatter": "aliariff.vscode-erb-beautify"
+    },
+    "vscode-erb-beautify.useBundler": true,
+    "sqltools.connections": [
+      {
+        "name": "Rails Development Database",
+        "driver": "PostgreSQL",
+        "previewLimit": 50,
+        "server": "db",
+        "port": 5432,
+
+        // update this to match config/database.yml
+        "database": "myapp_development",
+        "username": "vscode"
+      },
+      {
+        "name": "Rails Test Database",
+        "driver": "PostgreSQL",
+        "previewLimit": 50,
+        "server": "db",
+        "port": 5432,
+
+        // update this to match config/database.yml
+        "database": "myapp_test",
+        "username": "vscode"
+      }
+    ]
+  },
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "rebornix.Ruby",
+    "castwide.solargraph",
+    "koichisasada.vscode-rdbg",
+    "bung87.rails",
+    "hridoy.rails-snippets",
+    "craigmaslowski.erb",
+    "aliariff.vscode-erb-beautify",
+    // "cweijan.vscode-database-client2",
+    "mtxr.sqltools",
+    "mtxr.sqltools-driver-pg"
+  ],
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [3000, 5432],
+
+  "initializeCommand": "touch .devcontainer/.env",
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": ".devcontainer/postCreateCommand.sh",
+
+  // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "vscode",
+
+  "features": {
+    // "git": "latest"
+  }
+}

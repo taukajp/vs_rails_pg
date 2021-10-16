@@ -1,0 +1,9 @@
+1. .devcontainer/.envを作成
+2. .envにAPP_NAME(default: myapp)を設定
+3. devcontainer.jsonのworkspaceFolder(default: myapp)、database(default: myapp_xxx)を設定
+
+bin/rails s -b 0.0.0.0
+bundle exec rdbg -c -- bin/rails s -b 0.0.0.0
+
+docker rmi -f vs_rails_pg_web postgres:13
+docker system prune --volumes
