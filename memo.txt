@@ -1,0 +1,6 @@
+1. .devcontainer/.envを作成
+2. .envにAPP_NAME(default: myapp)、VARIANT(default: 3-bullseye)を設定
+3. devcontainer.jsonのworkspaceFolder(default: myapp)を設定
+
+bin/rails s -b 0.0.0.0
+bundle exec rdbg -c -- bin/rails s -b 0.0.0.0
