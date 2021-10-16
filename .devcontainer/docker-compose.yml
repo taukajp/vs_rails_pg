@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        # Update 'VARIANT' to pick a version of Ruby: 3, 3.2, 3.1, 3.0
+        # Append -bullseye or -buster to pin to an OS version.
+        # Use -bullseye variants on local arm64/Apple Silicon.
+        VARIANT: "${VARIANT:-3-bullseye}"
+        # Optional Node.js version to install
+        NODE_VERSION: "none"
+        APP_NAME: ${APP_NAME:-myapp}
+        PG_VERSION: ${PG_VERSION:-17}
+    volumes:
+      - ..:/${APP_NAME:-myapp}:cached
+      - bundle:/${APP_NAME:-myapp}/vendor/bundle
+    environment:
+      DB_HOST: ${DB_HOST:-db}
+      DB_NAME: ${DB_NAME:-docker}
+      DB_PASSWORD: ${DB_PASSWORD:-}
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:${PG_VERSION:-13}
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres/dbscript:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: postgres
+      # POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_DB: postgres
+      LANG: "C.UTF-8"
+      TZ: "Asia/Tokyo"
+    env_file:
+      - .env
+
+volumes:
+  bundle: null
+  postgres-data: null
