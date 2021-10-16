@@ -1,0 +1,32 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  NewCops: enable
+
+  Exclude:
+    - "Gemfile"
+    - "spec/**/*"
+    - "test/**/*"
+    - "vendor/**/*"
+    - "*.gemspec"
+
+Metrics:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
