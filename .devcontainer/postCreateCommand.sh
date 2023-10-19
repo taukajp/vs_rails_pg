@@ -6,7 +6,7 @@ test -d app && exit 0
 
 mv .gitignore .gitignorebk
 sudo chmod -R a+w vendor
-bundle exec rails new . -f -B -d postgresql  -a propshaft -c tailwind --skip-action-mailer --skip-action-mailbox --skip-action-text --skip-action-cable --skip-aciton-storage
+bundle exec rails new . -f -B -d postgresql  -a propshaft -c tailwind --skip-action-mailer --skip-action-mailbox --skip-action-text --skip-action-cable --skip-aciton-storage --skip-docker
 # cat <<EOF >> Gemfile
 # gem "rails-i18n"
 # group :development, :test do
